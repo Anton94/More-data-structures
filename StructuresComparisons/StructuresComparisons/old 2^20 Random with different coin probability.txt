@@ -1,0 +1,59 @@
+
+Input data is RANDOM!
+
+Running insertion of 1048576 elements:
+
+	Normal binary search tree:
+	...took 463 miliseconds.
+	...and memory 12582912 bytes.
+	Skip list with 30% coin probability and 19 maximal height:
+	...took 1413 miliseconds.
+	...and memory 18576684 bytes.
+	Skip list with 40% coin probability and 19 maximal height:
+	...took 1335 miliseconds.
+	...and memory 19578424 bytes.
+	Skip list with 50% coin probability and 19 maximal height:
+	...took 1420 miliseconds.
+	...and memory 20986368 bytes.
+	Skip list with 60% coin probability and 19 maximal height:
+	...took 1294 miliseconds.
+	...and memory 23083136 bytes.
+	Skip list with 70% coin probability and 19 maximal height:
+	...took 8338 miliseconds.
+	...and memory 26579804 bytes.
+
+Running searches of 1048576 elements:
+
+	Normal binary search tree:
+	...took 623 miliseconds.
+	Skip list with 30% coin probability and 19 maximal height:
+	...took 2020 miliseconds.
+	Skip list with 40% coin probability and 19 maximal height:
+	...took 1777 miliseconds.
+	Skip list with 50% coin probability and 19 maximal height:
+	...took 1869 miliseconds.
+	Skip list with 60% coin probability and 19 maximal height:
+	...took 1821 miliseconds.
+	Skip list with 70% coin probability and 19 maximal height:
+	...took 19720 miliseconds.
+
+Running removing of 1048576 elements(half of them not existing):
+
+	Normal binary search tree:
+	...took 716 miliseconds.
+	...and memory 6251784 bytes.
+	Skip list with 30% coin probability and 19 maximal height:
+	...took 2204 miliseconds.
+	...and memory 9288020 bytes.
+	Skip list with 40% coin probability and 19 maximal height:
+	...took 1929 miliseconds.
+	...and memory 9788768 bytes.
+	Skip list with 50% coin probability and 19 maximal height:
+	...took 1775 miliseconds.
+	...and memory 10488356 bytes.
+	Skip list with 60% coin probability and 19 maximal height:
+	...took 1915 miliseconds.
+	...and memory 11534596 bytes.
+	Skip list with 70% coin probability and 19 maximal height:
+	...took 14439 miliseconds.
+	...and memory 13299788 bytes.

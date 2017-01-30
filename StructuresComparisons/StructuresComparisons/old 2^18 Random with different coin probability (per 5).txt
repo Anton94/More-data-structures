@@ -1,0 +1,107 @@
+
+Input data is RANDOM!
+
+Running insertion of 262144 elements:
+
+	Normal binary search tree:
+	...took 65 miliseconds.
+	...and memory 3145728 bytes.
+	Skip list with 20% coin probability and 17 maximal height:
+	...took 215 miliseconds.
+	...and memory 4455932 bytes.
+	Skip list with 25% coin probability and 17 maximal height:
+	...took 189 miliseconds.
+	...and memory 4547128 bytes.
+	Skip list with 30% coin probability and 17 maximal height:
+	...took 182 miliseconds.
+	...and memory 4644340 bytes.
+	Skip list with 35% coin probability and 17 maximal height:
+	...took 186 miliseconds.
+	...and memory 4762408 bytes.
+	Skip list with 40% coin probability and 17 maximal height:
+	...took 180 miliseconds.
+	...and memory 4895508 bytes.
+	Skip list with 45% coin probability and 17 maximal height:
+	...took 212 miliseconds.
+	...and memory 5056908 bytes.
+	Skip list with 50% coin probability and 17 maximal height:
+	...took 208 miliseconds.
+	...and memory 5248700 bytes.
+	Skip list with 55% coin probability and 17 maximal height:
+	...took 230 miliseconds.
+	...and memory 5478072 bytes.
+	Skip list with 60% coin probability and 17 maximal height:
+	...took 246 miliseconds.
+	...and memory 5770504 bytes.
+	Skip list with 65% coin probability and 17 maximal height:
+	...took 348 miliseconds.
+	...and memory 6141112 bytes.
+	Skip list with 70% coin probability and 17 maximal height:
+	...took 819 miliseconds.
+	...and memory 6642684 bytes.
+
+Running searches of 262144 elements:
+
+	Normal binary search tree:
+	...took 65 miliseconds.
+	Skip list with 20% coin probability and 17 maximal height:
+	...took 273 miliseconds.
+	Skip list with 25% coin probability and 17 maximal height:
+	...took 294 miliseconds.
+	Skip list with 30% coin probability and 17 maximal height:
+	...took 246 miliseconds.
+	Skip list with 35% coin probability and 17 maximal height:
+	...took 226 miliseconds.
+	Skip list with 40% coin probability and 17 maximal height:
+	...took 218 miliseconds.
+	Skip list with 45% coin probability and 17 maximal height:
+	...took 198 miliseconds.
+	Skip list with 50% coin probability and 17 maximal height:
+	...took 180 miliseconds.
+	Skip list with 55% coin probability and 17 maximal height:
+	...took 193 miliseconds.
+	Skip list with 60% coin probability and 17 maximal height:
+	...took 201 miliseconds.
+	Skip list with 65% coin probability and 17 maximal height:
+	...took 416 miliseconds.
+	Skip list with 70% coin probability and 17 maximal height:
+	...took 1557 miliseconds.
+
+Running removing of 262144 elements(half of them not existing):
+
+	Normal binary search tree:
+	...took 83 miliseconds.
+	...and memory 1570428 bytes.
+	Skip list with 20% coin probability and 17 maximal height:
+	...took 321 miliseconds.
+	...and memory 2228176 bytes.
+	Skip list with 25% coin probability and 17 maximal height:
+	...took 280 miliseconds.
+	...and memory 2274440 bytes.
+	Skip list with 30% coin probability and 17 maximal height:
+	...took 270 miliseconds.
+	...and memory 2323744 bytes.
+	Skip list with 35% coin probability and 17 maximal height:
+	...took 271 miliseconds.
+	...and memory 2380576 bytes.
+	Skip list with 40% coin probability and 17 maximal height:
+	...took 236 miliseconds.
+	...and memory 2447668 bytes.
+	Skip list with 45% coin probability and 17 maximal height:
+	...took 227 miliseconds.
+	...and memory 2527304 bytes.
+	Skip list with 50% coin probability and 17 maximal height:
+	...took 248 miliseconds.
+	...and memory 2622516 bytes.
+	Skip list with 55% coin probability and 17 maximal height:
+	...took 262 miliseconds.
+	...and memory 2743552 bytes.
+	Skip list with 60% coin probability and 17 maximal height:
+	...took 228 miliseconds.
+	...and memory 2886588 bytes.
+	Skip list with 65% coin probability and 17 maximal height:
+	...took 355 miliseconds.
+	...and memory 3074184 bytes.
+	Skip list with 70% coin probability and 17 maximal height:
+	...took 1185 miliseconds.
+	...and memory 3322672 bytes.
