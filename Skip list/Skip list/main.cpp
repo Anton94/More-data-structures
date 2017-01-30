@@ -254,6 +254,12 @@ int main()
 {
 	srand(NULL);
 
+	//_CrtMemState s1, s2, s3;
+	//_CrtMemCheckpoint(&s1);
+
+
+
+	{
 
 	//testTowerHeights(1000, log2(1000000), 50);
 	//testTowerHeights(1000000, log2(1000000), 50);
@@ -266,12 +272,26 @@ int main()
 
 	//testWithPrintOfTheValues(150);
 
-	for(unsigned i = 15; i <= 20; ++i)
-		testMemoryUsed(1 << i, log2(1 << i), 50);
+	// Memory leaks cheching...
 
-	testInsertSearch(1 << 21);
-	testInsertSearchInvalidValues(1 << 22);
-	testInsertRemoveSearch(1 << 20 );
+
+		for (unsigned i = 15; i <= 20; ++i)
+			testMemoryUsed(1 << i, log2(1 << i), 50);
+
+		testInsertSearch(1 << 16);
+		testInsertSearchInvalidValues(1 << 16);
+		testInsertRemoveSearch(1 << 15);
+	}
+
+
+
+	//_CrtMemCheckpoint(&s2);
+
+	//if (_CrtMemDifference(&s3, &s1, &s2))
+	//{
+	//	std::cout << "Memory leak detected!" << std::endl;
+	//	_CrtMemDumpStatistics(&s3);
+	//}
 
 	return 0;
 }

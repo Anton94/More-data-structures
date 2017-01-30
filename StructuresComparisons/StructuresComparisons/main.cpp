@@ -61,10 +61,30 @@ void testing(unsigned SIZE)
 
 int main()
 {
-	srand(0);
+	// Memory leaks cheching...
+	//_CrtMemState s1, s2, s3;
+	//_CrtMemCheckpoint(&s1);
 
-	testing(1 << 18);
 
+
+
+	{
+
+
+		testing(1 << 8);
+
+
+	}	
+
+
+
+	//_CrtMemCheckpoint(&s2);
+
+	//if (_CrtMemDifference(&s3, &s1, &s2))
+	//{
+	//	std::cout << "Memory leak detected!" << std::endl;
+	//	_CrtMemDumpStatistics(&s3);
+	//}
 	return 0;
 }
 
@@ -110,7 +130,7 @@ void createTesterFunctions(vector<Tester<int>*> & testerFunctions)
 // Runs the the given test functions with the given tester objects and the given input data.
 void runTests(vector<StructureWrapper<int>*> & testerObjects, vector<Tester<int>*> & testerFunctions, const vector<int>* data)
 {
-	if (NUMBER_OF_TESTS <= 0)
+	if (NUMBER_OF_TESTS <= 0 || testerObjects.size() <= 0 || testerFunctions.size() <= 0)
 		return;
 	vector<vector<unsigned>> times; // 2D matrix with the time took for the tests. Rows - tested object, columns - tested function.
 	setZeroMatrix(times, testerObjects.size(), testerFunctions.size());

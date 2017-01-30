@@ -71,6 +71,8 @@ public:
 		if (this == &other)
 			return;
 
+		other.free();
+		delete[] other.towerHeightsStatistics;
 		other.root = root;
 		other.maxTowerHeight = maxTowerHeight;
 		other.coinProbability = coinProbability;
