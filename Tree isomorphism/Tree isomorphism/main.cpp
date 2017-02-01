@@ -1,6 +1,6 @@
 /*
 *	Anton Vasilev Dudov
-*	Github repository:
+*	Github repository: https://github.com/Anton94/More-data-structures/tree/master/Tree%20isomorphism/Tree%20isomorphism
 *
 *
 *	Presentation I looked - http://logic.pdmi.ras.ru/~smal/files/smal_jass08_slides.pdf
