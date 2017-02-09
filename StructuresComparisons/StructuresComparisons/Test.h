@@ -135,4 +135,81 @@ public:
 	virtual ~SearchTest() {}
 };
 
+// Searches for elements in the structure, but with ~logarithmic range of elements. Searches for ~ n*log2(n) elements.
+// Makes a "windows" of ~log2(n) of elements and searches random elements witheen 
+template<class T>
+class SearchLocalityTest : public Tester<T>
+{
+public:
+	// Returns the time that took to execute the test on the @tester structure and with the @data elements.
+	virtual unsigned run(StructureWrapper<T> * tester)
+	{
+		clock_t start, end;
+		start = clock();
+		for (unsigned i = 0, bound = data.size(); i < bound; ++i)
+				tester->search(data[i]);
+		end = clock();
+		return end - start;
+	}
+
+	// Makes the data it needs for it's test from the given input data.
+	virtual void setData(const vector<T>* in)
+	{
+		unsigned LOG = closeLogTwo(in->size());
+
+		data.resize((in->size() - LOG) * LOG);
+
+		for (unsigned j = 0, i = 0, bound = in->size() - LOG; i < bound; ++i)
+			for (unsigned k = i, boundWindow = i + LOG; k < boundWindow; ++k)
+				data[j++] = (*in)[i + rand() % LOG]; // Adds element with random index in range [i, i + LOG)
+	}
+
+	// Returns the description of what this test does.
+	virtual string getDescription() const
+	{
+		unsigned LOG = closeLogTwo(data.size());
+		return "Searching with locality (" + to_string(data.size()) + " searches made)";
+	}
+	virtual ~SearchLocalityTest() {}
+};
+
+// Searches for only ~log2(n) elements. n times
+template<class T>
+class SearchLocalityFixedTest : public Tester<T>
+{
+public:
+	// Returns the time that took to execute the test on the @tester structure and with the @data elements.
+	virtual unsigned run(StructureWrapper<T> * tester)
+	{
+		clock_t start, end;
+		start = clock();
+		for (unsigned i = 0, bound = data.size(); i < bound; ++i)
+				tester->search(data[i]);
+		end = clock();
+		return end - start;
+	}
+
+	// Makes the data it needs for it's test from the given input data.
+	virtual void setData(const vector<T>* in)
+	{
+		unsigned j = 0, LOG = closeLogTwo(in->size()),
+			size = in->size();
+		data.resize(size);
+
+		for (unsigned bound = LOG; j < bound; ++j)
+			data[j] = (*in)[rand() % size]; // Fixed random elements, ~log2 of them
+
+		while (j < size)
+			data[j++] = data[rand() % LOG]; // Copy element with random index in range [0, LOG)
+	}
+
+	// Returns the description of what this test does.
+	virtual string getDescription() const
+	{
+		unsigned LOG = closeLogTwo(data.size());
+		return "Searching with fixed locality (" + to_string(data.size()) + " searches made)";
+	}
+	virtual ~SearchLocalityFixedTest() {}
+};
+
 #endif

@@ -161,6 +161,26 @@ int main()
 	}
 
 
+	///* I needed to find some bug...*/
+	//BinarySearchTreeIterative<int> it;
+	//BinarySearchTreeRecursive<int> r;
+	//unsigned SIZE = 1 << 16;
+	//vector<int> v(SIZE);
+	//for (unsigned k, i = 0; i < SIZE; ++i)
+	//{
+	//	k = rand() % 1024;
+	//	it.insert(k);
+	//	r.insert(k);
+	//	v[i] = k;
+	//}
+	//printf("%d vs %d\n", it.size(), r.size());
+	//for (unsigned i = 0; i < SIZE/2; ++i)
+	//{
+	//	it.remove(v[i]);
+	//	r.remove(v[i]);
+	//}
+	//printf("%d vs %d\n", it.size(), r.size());
+
 	_CrtMemCheckpoint(&s2);
 
 	if (_CrtMemDifference(&s3, &s1, &s2))

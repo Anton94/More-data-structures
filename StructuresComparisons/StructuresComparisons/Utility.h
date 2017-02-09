@@ -3,9 +3,11 @@
 #include <vector>
 using std::vector;
 
+unsigned closeLogTwo(unsigned x); // Returns some close number to log2 of the given.
 vector<int>* getDataIncreasing(vector<int>* data);
 vector<int>* getDataDecreasing(vector<int>* data);
 vector<int>* getDataRandomOdd(vector<int>* data);
+vector<int>* getDataRandomOddUnique(vector<int>* data);
 //vector<int>* getDataRandomEven(vector<int>* data);
 
 

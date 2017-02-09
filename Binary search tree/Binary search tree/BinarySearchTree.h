@@ -2,6 +2,7 @@
 #define BINARY_SEARCH_TREE
 
 #include <stack>
+#include <cassert>
 using std::stack;
 
 template<class T>
@@ -50,6 +51,7 @@ public:
 	void insert(const T& val)
 	{
 		insertIterative(val);
+		assert(checkValidTree(root));
 	}
 
 	// Returns true of the searched value is in the tree, otherwise returns false.
@@ -62,6 +64,7 @@ public:
 	void remove(const T& val)
 	{
 		removeIterative(val);
+		assert(checkValidTree(root));
 	}
 
 	// Returns the ~memory used.
@@ -74,6 +77,11 @@ public:
 	bool isEmpty() const
 	{
 		return !root; // root == NULL
+	}
+
+	unsigned size() const
+	{
+		return count;
 	}
 
 	// Frees the tree.
@@ -146,6 +154,7 @@ private:
 					(*n)->val = removeSmallerElementIterative(&(*n)->right);
 				}
 				--count;
+				break;
 			}
 			else if (val < (*n)->val)
 				n = &(*n)->left;
@@ -202,6 +211,21 @@ private:
 				path.push(curr->right);
 			delete curr;
 		}
+	}
+
+	// Checks if the tree is valid binary search tree.
+	bool checkValidTree(Node<T>* n) const
+	{
+		if (!n || (!n->left && !n->right)) // (!n->left && !n->right) one recursion level less for the leaves.
+			return true;
+
+		// Don't check for == because the rotation can mess the equal vals, the nodes can be on both sides.
+		if (n->right && n->right->val < n->val)
+			return false;
+		if (n->left && n->left->val > n->val)
+			return false;
+
+		return checkValidTree(n->left) && checkValidTree(n->right);
 	}
 private:
 	// Ban copy constructor and operator=
@@ -269,17 +293,20 @@ class BinarySearchTreeRecursive
 {
 private:
 	Node<T> * root;
+	unsigned count;
 public:
 	// Creates empty tree.
 	BinarySearchTreeRecursive()
 	{
 		root = NULL;
+		count = 0;
 	}
 
 	// Inserts element @val in the tree.
 	void insert(const T& val)
 	{
 		insertRecursive(root, val);
+		++count;
 	}
 
 	// Returns true of the searched value is in the tree, otherwise returns false.
@@ -298,6 +325,11 @@ public:
 	bool isEmpty() const
 	{
 		return !root; // root == NULL
+	}
+
+	unsigned size() const
+	{
+		return count;
 	}
 
 	// Frees the tree.
@@ -348,7 +380,6 @@ private:
 
 		if (r->val == val) // This is the element I need to remove.
 		{
-
 			if (!r->left || !r->right) // Have one or zero childners.
 			{
 				Node<T> * p = (!r->left) ? r->right : r->left;
@@ -361,6 +392,7 @@ private:
 				// Find the smaller element from the right subtree, put it in the @r->val and remove the "smaller element in the right subtree".
 				r->val = removeSmallerElementRecursive(r->right);
 			}
+			--count;
 		}
 		else if (val < r->val)
 			removeRecursive(r->left, val);

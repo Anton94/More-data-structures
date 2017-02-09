@@ -15,6 +15,7 @@
 #include "Utility.h"
 #include "../../Binary search tree/Binary search tree/BinarySearchTree.h" // Another prject..
 #include "../../Skip list/Skip list/SkipList.h"
+#include "../../Splay tree/Splay tree/Splay tree.h"
 using std::cout;
 using std::to_string;
 using std::vector;
@@ -46,10 +47,10 @@ void testing(unsigned SIZE)
 	createTesterFunctions(testerFunctions);
 
 	// Run the tests.
-	//cout << "\nInput data is SORTED in INCREASING order!\n";
-	//runTests(testers, getDataIncreasing(&data));
+	cout << "\nInput data is SORTED in INCREASING order!\n";
+	runTests(testerObjects, testerFunctions, getDataIncreasing(&data));
 	//cout << "\nInput data is SORTED in DECREASING order!\n";
-	//runTests(testers, getDataDecreasing(&data));
+	//runTests(testerObjects, testerFunctions, getDataDecreasing(&data));
 	cout << "\nInput data is RANDOM!\n";
 	runTests(testerObjects, testerFunctions, getDataRandomOdd(&data));
 
@@ -62,47 +63,41 @@ void testing(unsigned SIZE)
 int main()
 {
 	// Memory leaks cheching...
-	//_CrtMemState s1, s2, s3;
-	//_CrtMemCheckpoint(&s1);
-
-
-
-
+	_CrtMemState s1, s2, s3;
+	_CrtMemCheckpoint(&s1);
+	
 	{
-
-
-		testing(1 << 8);
-
-
+		testing(1 << 18);
 	}	
+	
+	_CrtMemCheckpoint(&s2);
 
-
-
-	//_CrtMemCheckpoint(&s2);
-
-	//if (_CrtMemDifference(&s3, &s1, &s2))
-	//{
-	//	std::cout << "Memory leak detected!" << std::endl;
-	//	_CrtMemDumpStatistics(&s3);
-	//}
+	if (_CrtMemDifference(&s3, &s1, &s2))
+	{
+		std::cout << "Memory leak detected!" << std::endl;
+		_CrtMemDumpStatistics(&s3);
+	}
 	return 0;
 }
 
 // Creates the tester objects. TODO - allocation check...
 void createTesterObjects(vector<StructureWrapper<int>*> & testers, unsigned SIZE)
 {
-	unsigned LOG_SIZE = log2(SIZE);
+	unsigned LOG_SIZE = closeLogTwo(SIZE);
 	unsigned unique = time(NULL); // Not so unique..
+
 	BinarySearchTreeIterative<int> bt;
 	testers.push_back(new (std::nothrow) WrappedBST<int>(bt));
+	SplayTree<int> st;
+	testers.push_back(new (std::nothrow) WrappedSplayTree<int>(st));
 
-	int offsetHeight = 6;
+	int offsetHeight = 1;
 
 	// Different maximal tower height.
 	for (int height = std::max(1, (int)LOG_SIZE - offsetHeight), bound = LOG_SIZE + offsetHeight; height <= bound; ++height)
 	{
 		// Different coin probability.
-		for (int p = 20; p <= 70; p += 5)
+		for (int p = 56; p <= 55; p += 5)
 		{
 
 			SkipList<int> skipListCoinProbability(height, p, unique);
@@ -124,7 +119,9 @@ void createTesterFunctions(vector<Tester<int>*> & testerFunctions)
 	// NOTE: the order is important!
 	testerFunctions.push_back(new (std::nothrow) InsertTest<int>());
 	testerFunctions.push_back(new (std::nothrow) SearchTest<int>());
-	testerFunctions.push_back(new (std::nothrow) RemoveTest<int>());
+	testerFunctions.push_back(new (std::nothrow) SearchLocalityTest<int>());
+	testerFunctions.push_back(new (std::nothrow) SearchLocalityFixedTest<int>());
+//	testerFunctions.push_back(new (std::nothrow) RemoveTest<int>());
 }
 
 // Runs the the given test functions with the given tester objects and the given input data.

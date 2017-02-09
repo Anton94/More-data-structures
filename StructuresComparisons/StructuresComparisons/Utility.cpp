@@ -1,5 +1,15 @@
 #include "Utility.h"
 
+
+// Returns some close number to log2 of the given.
+unsigned closeLogTwo(unsigned x)
+{
+	unsigned counter = 1;
+	while (x >>= 1)
+		++counter;
+	return counter;
+}
+
 // Writes to the @data vector increasing numbers in range[1, size]
 // Returns the given vector.
 vector<int>* getDataIncreasing(vector<int>* data)
@@ -33,6 +43,21 @@ vector<int>* getDataRandomOdd(vector<int>* data)
 	return data;
 }
 
+
+// Writes to the @data vector random unique ODD numbers.
+// Returns a pointer to the given vector.
+vector<int>* getDataRandomOddUnique(vector<int>* data)
+{
+	// Insert some random UNIQUE numbers.
+	for (unsigned k, i = 0, bound = data->size(); i < bound; ++i)
+	{
+		while (std::find(data->begin(), data->end(), k = ((rand() + 1)*((rand() + 1))) | 1) != data->end())
+			;
+		(*data)[i] = k;
+	}
+
+	return data;
+}
 
 // Writes to the @dataToRemove every second element to be +1(so if data has odd numbers, they will be even, so they will not be in @data vector. The others are the same.
 // At the end, I will remove 50% of the elements and the others will not be found in the structure.
