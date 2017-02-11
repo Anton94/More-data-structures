@@ -62,21 +62,21 @@ void testing(unsigned SIZE)
 
 int main()
 {
-	// Memory leaks cheching...
-	_CrtMemState s1, s2, s3;
-	_CrtMemCheckpoint(&s1);
+	//// Memory leaks cheching...
+	//_CrtMemState s1, s2, s3;
+	//_CrtMemCheckpoint(&s1);
 	
 	{
-		testing(1 << 18);
+		testing(1 << 11);
 	}	
 	
-	_CrtMemCheckpoint(&s2);
+	//_CrtMemCheckpoint(&s2);
 
-	if (_CrtMemDifference(&s3, &s1, &s2))
-	{
-		std::cout << "Memory leak detected!" << std::endl;
-		_CrtMemDumpStatistics(&s3);
-	}
+	//if (_CrtMemDifference(&s3, &s1, &s2))
+	//{
+	//	std::cout << "Memory leak detected!" << std::endl;
+	//	_CrtMemDumpStatistics(&s3);
+	//}
 	return 0;
 }
 
@@ -97,7 +97,7 @@ void createTesterObjects(vector<StructureWrapper<int>*> & testers, unsigned SIZE
 	for (int height = std::max(1, (int)LOG_SIZE - offsetHeight), bound = LOG_SIZE + offsetHeight; height <= bound; ++height)
 	{
 		// Different coin probability.
-		for (int p = 56; p <= 55; p += 5)
+		for (int p = 40; p <= 60; p += 5)
 		{
 
 			SkipList<int> skipListCoinProbability(height, p, unique);
