@@ -1,0 +1,60 @@
+
+Input data: every even element is in the range[0, 4194304] and every odd element has
+	0% probability to be outside of the range
+	100% probability to be like the previous 1 element(s)!
+
+
+Running Inserts the even(index) elements and searches the odd(index) once of 4194304 elements:
+
+	Splay tree:
+	...took 1585 miliseconds.
+	...and memory 25165824 bytes.
+	AVL tree:
+	...took 1886 miliseconds.
+	...and memory 33554432 bytes.
+	Splay tree with no duplications of values:
+	...took 1122 miliseconds.
+	...and memory 393216 bytes.
+	AVL tree with no duplications of values:
+	...took 363 miliseconds.
+	...and memory 524288 bytes.
+
+Input data: every even element is in the range[0, 4194304] and every odd element has
+	0% probability to be outside of the range
+	80% probability to be like the previous 8 element(s)!
+
+
+Running Inserts the even(index) elements and searches the odd(index) once of 4194304 elements:
+
+	Splay tree:
+	...took 1864 miliseconds.
+	...and memory 25165824 bytes.
+	AVL tree:
+	...took 1512 miliseconds.
+	...and memory 33554432 bytes.
+	Splay tree with no duplications of values:
+	...took 873 miliseconds.
+	...and memory 393216 bytes.
+	AVL tree with no duplications of values:
+	...took 382 miliseconds.
+	...and memory 524288 bytes.
+
+Input data: every even element is in the range[0, 4194304] and every odd element has
+	50% probability to be outside of the range
+	100% probability to be like the previous 1 element(s)!
+
+
+Running Inserts the even(index) elements and searches the odd(index) once of 4194304 elements:
+
+	Splay tree:
+	...took 1621 miliseconds.
+	...and memory 25165824 bytes.
+	AVL tree:
+	...took 1448 miliseconds.
+	...and memory 33554432 bytes.
+	Splay tree with no duplications of values:
+	...took 817 miliseconds.
+	...and memory 393216 bytes.
+	AVL tree with no duplications of values:
+	...took 310 miliseconds.
+	...and memory 524288 bytes.
