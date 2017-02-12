@@ -71,6 +71,49 @@ vector<int>* getDataToRemove(vector<int>* dataToRemove, const vector<int>* data)
 	return dataToRemove;
 }
 
+// Writes to the @data vector (which hase even number of elements!) on the even places some random value in [0, 100] and
+// on the odd places some value outside of range with @probabilityOutsideRange probability (and with 50% probability outside "which side" it will be..)
+// otherwise writes some recent value(random value of the previous @previousCount even elements)
+// otherwise writes some random element in the range.
+// NOTE: first applies the probability to be outside, after that to be like previous and if both fails- some random....
+vector<int>* getDataRandomWithProbabilities(vector<int>* data, int a, int b, unsigned probabilityOutsideRange, unsigned probabilityRecentElements, unsigned previousCount)
+{
+	if (data->size() % 2 == 1) // Should not be, but in any case...
+	{
+		data->resize(0);
+		return data;
+	}
+
+	b += 1; // So I could get random elements @b
+	int previous;
+	for (unsigned i = 0, bound = data->size(); i < bound; i += 2)
+	{
+		(*data)[i] = a + rand() % b; // set the even element.
+		
+		if (rand() % 100 < probabilityOutsideRange) // set the odd element to be outside of the range.
+		{
+			if (rand() % 100 < 50) // 50% chance to be outside the left side, and 50% chance to be outside the right side of the range
+				(*data)[i + 1] = a - 1 - rand();
+			else
+				(*data)[i + 1] = b + 1 + rand();
+		}
+		else if (rand() % 100 < probabilityRecentElements) // set the odd element to be like some random element from the previous @previousCount elements.
+		{
+			previous = i - (rand() % previousCount);
+			if (previous < 0) // Outside of the vector range, make it the first element, doesn't metter so much...
+				previous = 0;
+			(*data)[i + 1] = (*data)[previous];
+		}
+		else // It will be some random element from the range
+		{
+			(*data)[i + 1] = a + rand() % b;
+		}
+	}
+
+	return data;
+}
+
+
 // Writes to the @data vector random even numbers.
 // Returns the given vector.
 //vector<int>* getDataRandomEven(vector<int>* data)
@@ -86,6 +129,7 @@ vector<int>* getDataToRemove(vector<int>* dataToRemove, const vector<int>* data)
 //
 //	return data;
 //}
+
 
 
 

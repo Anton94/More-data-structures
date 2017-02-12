@@ -131,7 +131,7 @@ void testInsertRemoveSearch(const unsigned SIZE)
 }
 int main()
 {
-	//srand(NULL);
+	srand(NULL);
 	//_CrtMemState s1, s2, s3;
 	//_CrtMemCheckpoint(&s1);
 	{
@@ -139,7 +139,6 @@ int main()
 		testInsertSearch(1 << 16);
 		testInsertSearchInvalidValues(1 << 16);
 		testInsertRemoveSearch(1 << 16);
-
 
 	}
 

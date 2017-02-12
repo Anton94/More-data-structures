@@ -1,6 +1,17 @@
 #pragma once
 
-/* Recursive implementation of splay tree. */
+/* 
+*	Name: Anton Dudov
+*	Github repository: https://github.com/Anton94/More-data-structures/tree/master/Splay%20tree
+*
+*	Recursive implementation of splay tree. 
+*
+*
+*	NOTE: I added insertion with no duplication of elements just to test something...
+*
+*
+*
+*/
 
 #include <cassert>
 #include <vector>
@@ -41,13 +52,22 @@ public:
 	// Inserts new node with value @val in the tree and make rotations so this new node becomes the root.
 	void insert(const T& val)
 	{
-		vector<Node*> path; // TODO: Initial size logN
+		vector<Node*> path; // TODO: Initial capacity logN
+		path.reserve(42);
 		insert(path, root, val);
 		++count;
 
 		splay(path);
 		assert(root->val == val);
 		assert(checkValidTree(root));
+	}
+
+	// Inserts new node with value @val in the tree and make rotations so this new node becomes the root only if the val is not already in the tree.
+	void insertNoDuplications(const T& val)
+	{		
+		if (searchSimple(root, val))
+			return;
+		insert(val);
 	}
 
 	// Removes the first node with value @val. Standart removing in BST.
@@ -61,7 +81,8 @@ public:
 	// Searches for the first node with value @val and makes rotations so this node becomes the root.
 	bool search(const T& val)
 	{
-		vector<Node*> path; // TODO: Initial size logN
+		vector<Node*> path; // TODO: Initial capacity logN
+		path.reserve(42);
 		if (search(path, root, val)) // If there is such node, make the splay routine
 		{
 			splay(path);
@@ -183,6 +204,21 @@ private:
 			return search(path, r->left, val);
 		else
 			return search(path, r->right, val);
+	}
+
+	// Returns true of the searched value is in the tree, otherwise returns false
+	bool searchSimple(Node* r, const T& val) const
+	{
+		if (!r)
+			return false;
+
+		if (r->val == val)
+			return true;
+
+		if (val < r->val)
+			return searchSimple(r->left, val);
+		else // >
+			return searchSimple(r->right, val);
 	}
 
 	// Removes a element @val from the tree. (if there is such element)

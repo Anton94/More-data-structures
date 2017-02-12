@@ -173,11 +173,13 @@ public:
 	virtual ~SearchLocalityTest() {}
 };
 
-// Searches for only ~log2(n) elements. n times
+// Searches for only @count elements. n times (Note, if count == -1, calculates ~logarithmic range of the input data)
 template<class T>
 class SearchLocalityFixedTest : public Tester<T>
 {
+	int count;
 public:
+	SearchLocalityFixedTest(int w = -1) : count(w) {}
 	// Returns the time that took to execute the test on the @tester structure and with the @data elements.
 	virtual unsigned run(StructureWrapper<T> * tester)
 	{
@@ -194,22 +196,62 @@ public:
 	{
 		unsigned j = 0, LOG = closeLogTwo(in->size()),
 			size = in->size();
+		unsigned BOX_SIZE = count < 0 ? LOG : count;
 		data.resize(size);
 
-		for (unsigned bound = LOG; j < bound; ++j)
-			data[j] = (*in)[rand() % size]; // Fixed random elements, ~log2 of them
+		for (unsigned bound = BOX_SIZE; j < bound; ++j)
+			data[j] = (*in)[rand() % size]; // Fixed random elements, @COUNT of them
 
 		while (j < size)
-			data[j++] = data[rand() % LOG]; // Copy element with random index in range [0, LOG)
+			data[j++] = data[rand() % BOX_SIZE]; // Copy element with random index in range [0, COUNT)
 	}
 
 	// Returns the description of what this test does.
 	virtual string getDescription() const
 	{
 		unsigned LOG = closeLogTwo(data.size());
-		return "Searching with fixed locality (" + to_string(data.size()) + " searches made)";
+		return "Searching with fixed locality of " + to_string(count) + " elements (" + to_string(data.size()) + " searches made)";
 	}
 	virtual ~SearchLocalityFixedTest() {}
+};
+
+// Inserts an element from the input data at position 'i' and searches for the element at position 'i+1' and so on, and so on..
+template<class T>
+class InsertEvenSearchOddTest : public Tester<T>
+{
+public:
+	// Returns the time that took to execute the test on the @tester structure and with the @data elements.
+	virtual unsigned run(StructureWrapper<T> * tester)
+	{
+		clock_t start, end;
+		start = clock();
+		if (data.size())
+		for (unsigned i = 0, bound = data.size(); i < bound; i += 2)
+		{
+			tester->insert(data[i]);
+			tester->search(data[i+1]);
+		}
+		end = clock();
+		return end - start;
+	}
+
+	// Makes the data it needs for it's test from the given input data. The input data must be with even number of elements.
+	virtual void setData(const vector<T>* in)
+	{
+		if (in->size() % 2 != 0) // Invalid input data...(odd number of elements)
+			return;
+		// Resize the @data.
+		data.resize(in->size());
+		// For the removing, I need the same data.
+		memcpy(&data[0], &(*in)[0], in->size() * sizeof(T));
+	}
+
+	// Returns the description of what this test does.
+	virtual string getDescription() const
+	{
+		return "Inserts the even(index) elements and searches the odd(index) once";
+	}
+	virtual ~InsertEvenSearchOddTest() {}
 };
 
 #endif

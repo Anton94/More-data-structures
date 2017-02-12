@@ -3,6 +3,10 @@
 
 /*
 *
+*	Name: Anton Dudov
+*	Github repository: https://github.com/Anton94/More-data-structures/tree/master/AVL%20tree
+*
+*	
 *	source I used to figure out the details about the structure - "Algorithms and data structures in C++ (Leendert Ammeraal)"
 *	
 *
@@ -16,6 +20,9 @@
 *	and with another routine deletes it(the node has no right child, so easy to delete) (the routine looks for NODE, not only value)
 *	This way have an advantage - if someone keeps pointers to some nodes of the tree, when I remove a element, and if I swapped only the values, some other node with some other "old" value could be removed and those who keep pointers to nodes will get unexpected value change and unexpected node removed.
 *	If I keep the multiple values in some other structure in the node it will be better, but I want to implement it this way, because I have not implement it before, for "exprecience" purposes...
+*
+*
+*	I added insertion with no duplications to test something..
 */
 
 #include <cassert>
@@ -72,6 +79,14 @@ public:
 		assert(checkValidBSTandHeights(root));
 	}
 
+	// Inserts the element @val into the tree only if the val is not already in the tree.
+	void insertNoDuplications(const T& val)
+	{
+		if (search(val))
+			return;
+		insert(val);
+	}
+
 	// Returns true if the @val is in the tree.
 	bool search(const T& val)
 	{
@@ -108,8 +123,8 @@ private:
 			}
 			else if (n->height == 2)
 			{
-				if (n->right->height == -1) //TODO// The new inserted element is in "right-left" subtree (-1 because if the n->right has height 0(balanced), it wont return 1 and if n->right==1, that means that the new element it is in "right-right", so it's OK)
-					rightRotation(n->right); //TODO// Makes the element "right-right", because if it was right-left, with left rotation on @n, it will make no difference, just make it symetrical on the other side!
+				if (n->right->height == -1) // If the right-left subtree has bigger height than the right-right subtree
+					rightRotation(n->right); // Rotates it so the right-right subtree will have bigger height than right-left subtree
 				
 				leftRotation(n); // Now left rotation on @n (when the inserted element is in right-right subtree) will decrease the height (and the old HEIGHT has been some X, after insertion becomes X+1 and after left rotation it will be again X, so no need for further adjustments on the back path to the root)
 			}

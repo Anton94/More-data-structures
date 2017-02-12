@@ -8,6 +8,7 @@ vector<int>* getDataIncreasing(vector<int>* data);
 vector<int>* getDataDecreasing(vector<int>* data);
 vector<int>* getDataRandomOdd(vector<int>* data);
 vector<int>* getDataRandomOddUnique(vector<int>* data);
+vector<int>* getDataRandomWithProbabilities(vector<int>* data, int a, int b, unsigned probabilityOutsideRange, unsigned probabilityRecentElements, unsigned previousCount = 1);
 //vector<int>* getDataRandomEven(vector<int>* data);
 
 

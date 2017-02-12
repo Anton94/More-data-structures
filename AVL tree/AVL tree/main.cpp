@@ -134,24 +134,23 @@ void testInsertRemoveSearch(const unsigned SIZE)
 
 int main()
 {
-	//srand(NULL);
-	_CrtMemState s1, s2, s3;
-	_CrtMemCheckpoint(&s1);
+	srand(NULL);
+	//_CrtMemState s1, s2, s3;
+	//_CrtMemCheckpoint(&s1);
 	{
-
-	//	testInsertSearch(1 << 20);
-	//	testInsertSearchInvalidValues(1 << 20);
+		testInsertSearch(1 << 20);
+		testInsertSearchInvalidValues(1 << 20);
 		testInsertRemoveSearch(1 << 22);
 
 
 	}
 
-	_CrtMemCheckpoint(&s2);
+	//_CrtMemCheckpoint(&s2);
 
-	if (_CrtMemDifference(&s3, &s1, &s2))
-	{
-		std::cout << "Memory leak detected!" << std::endl;
-		_CrtMemDumpStatistics(&s3);
-	}
+	//if (_CrtMemDifference(&s3, &s1, &s2))
+	//{
+	//	std::cout << "Memory leak detected!" << std::endl;
+	//	_CrtMemDumpStatistics(&s3);
+	//}
 	return 0;
 }
